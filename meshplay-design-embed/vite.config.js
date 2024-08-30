@@ -9,9 +9,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "lib/main.jsx"),
-      name: "MesheryDesignEmbed",
+      name: "MeshplayDesignEmbed",
       // the proper extensions will be added
-      fileName: "meshery-design-embed",
+      fileName: "meshplay-design-embed",
     },
     rollupOptions: {
       external: [...Object.keys(packageJson.peerDependencies)],

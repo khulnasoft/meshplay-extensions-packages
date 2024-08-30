@@ -1,6 +1,6 @@
 ---
 name: 💡 Feature Request
-about: Suggest an enhancement to Meshery.
+about: Suggest an enhancement to Meshplay.
 title: ''
 labels: 'kind/enhancement'
 assignees: ''
@@ -21,4 +21,4 @@ assignees: ''
 <!-- [Optional] Any visual diagrams of the desired user interface. -->
 
 ---
-**[Contributor Guide](https://docs.meshery.io/project/contributing)**
+**[Contributor Guide](https://docs.meshplay.io/project/contributing)**

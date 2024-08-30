@@ -1,4 +1,4 @@
-name: Release and Deploy Meshery Cloud
+name: Release and Deploy Meshplay Cloud
 on:
   workflow_call:
     inputs:
@@ -23,13 +23,13 @@ on:
         required: true
       DOCKER_PASSWORD: 
         required: true
-      MESHERY_CLOUD_AWS_PROD_USERNAME:
+      MESHPLAY_CLOUD_AWS_PROD_USERNAME:
         required: true
-      MESHERY_CLOUD_AWS_STG_HOST:
+      MESHPLAY_CLOUD_AWS_STG_HOST:
         required: true
-      MESHERY_CLOUD_AWS_PROD_HOST:
+      MESHPLAY_CLOUD_AWS_PROD_HOST:
         required: true
-      MESHERY_CLOUD_AWS_PROD_KEY:
+      MESHPLAY_CLOUD_AWS_PROD_KEY:
         required: true
 
   workflow_dispatch:
@@ -56,10 +56,10 @@ jobs:
     if: inputs.release-environment == 'production'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Meshery Cloud code
+      - name: Checkout Meshplay Cloud code
         uses: actions/checkout@v4
         with:
-          repository: layer5io/meshery-cloud
+          repository: khulnasoft/meshplay-cloud
           fetch-depth: 1
           token: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: API Docs - Install Redocly
@@ -68,27 +68,27 @@ jobs:
       - name: API Docs - Update schema.yml
         uses: fjogeleit/yaml-update-action@v0.13.2
         with:
-          repository: l5io/meshery-cloud
+          repository: l5io/meshplay-cloud
           branch: master
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           valueFile: 'models/openapi-schema/schema.yml'
           commitChange: true
           propertyPath: 'info.version'
           value: ${{inputs.release-version}}
-          message: Updated meshery-cloud version to ${{inputs.release-version}}
+          message: Updated meshplay-cloud version to ${{inputs.release-version}}
           commitUserName: l5io
-          commitUserEmail: l5io@layer5.io
+          commitUserEmail: l5io@khulnasoft.com
       
   lint-fix:
     name: Lint UI and Backend
     if: inputs.release-environment == 'staging'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Meshery Cloud code
+      - name: Checkout Meshplay Cloud code
         uses: actions/checkout@v4
         with:
-          path: meshery-cloud
-          repository: layer5io/meshery-cloud
+          path: meshplay-cloud
+          repository: khulnasoft/meshplay-cloud
           fetch-depth: 1
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           ref: ${{ inputs.branch }}
@@ -101,18 +101,18 @@ jobs:
            npm i -g eslint;
       - name: Lint UI and Backend
         run: |
-          cd meshery-cloud
+          cd meshplay-cloud
           make ui-lint-fix
           make cloud-lint-fix
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_user_name: l5io
-          commit_user_email: l5io@layer5.io
+          commit_user_email: l5io@khulnasoft.com
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit_options: '--signoff'
           commit_message: '[CI] Lint fix backend/ui'
-          repository: meshery-cloud
+          repository: meshplay-cloud
 
   staging:
     needs: update-doc-release-version
@@ -120,17 +120,17 @@ jobs:
     name: Staging - Docker build and push
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Meshery Cloud code
+    - name: Checkout Meshplay Cloud code
       uses: actions/checkout@v4
       with:
-        path: meshery-cloud
-        repository: layer5io/meshery-cloud
+        path: meshplay-cloud
+        repository: khulnasoft/meshplay-cloud
         fetch-depth: 1
         token: ${{ secrets.GH_ACCESS_TOKEN }}
         ref: ${{ inputs.branch }}
     - name: Build Docs
       run:  |
-        cd meshery-cloud
+        cd meshplay-cloud
         npm i -g @redocly/cli@latest
         make docs-build
     - name: Set up QEMU
@@ -141,7 +141,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-          images: layer5/meshery-cloud
+          images: khulnasoft/meshplay-cloud
           flavor: |
             latest=true
           tags: |
@@ -158,7 +158,7 @@ jobs:
     - name: Build and Push
       uses: docker/build-push-action@v5
       with:
-        context: meshery-cloud
+        context: meshplay-cloud
         push: true
         build-args: |
           ENVIRONMENT=stg
@@ -173,16 +173,16 @@ jobs:
           GIT_VERSION: ${{inputs.release-version}}
           GIT_COMMITSHA: ${{ github.sha }}
       with:
-        host: ${{ secrets.MESHERY_CLOUD_AWS_STG_HOST }}
-        username: ${{ secrets.MESHERY_CLOUD_AWS_PROD_USERNAME }}
-        key: ${{ secrets.MESHERY_CLOUD_AWS_PROD_KEY }}
+        host: ${{ secrets.MESHPLAY_CLOUD_AWS_STG_HOST }}
+        username: ${{ secrets.MESHPLAY_CLOUD_AWS_PROD_USERNAME }}
+        key: ${{ secrets.MESHPLAY_CLOUD_AWS_PROD_KEY }}
         port: 22
         envs: GIT_VERSION,GIT_COMMITSHA
         script: |
           sudo su
-          cd meshery-cloud
-          sudo su - -c "git pull https://l5io:${{ secrets.GH_ACCESS_TOKEN }}@github.com/layer5io/meshery-cloud"
-          docker pull layer5/meshery-cloud:staging-$GIT_VERSION
+          cd meshplay-cloud
+          sudo su - -c "git pull https://l5io:${{ secrets.GH_ACCESS_TOKEN }}@github.com/khulnasoft/meshplay-cloud"
+          docker pull khulnasoft/meshplay-cloud:staging-$GIT_VERSION
           sudo su - -c "whoami"
           make stg-deploy GIT_VERSION=$GIT_VERSION
           docker system prune -f
@@ -193,16 +193,16 @@ jobs:
     name: Production - Docker build and push
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Meshery Cloud code
+    - name: Checkout Meshplay Cloud code
       uses: actions/checkout@v4
       with:
-        repository: layer5io/meshery-cloud
-        path: meshery-cloud
+        repository: khulnasoft/meshplay-cloud
+        path: meshplay-cloud
         fetch-depth: 1
         token: ${{ secrets.GH_ACCESS_TOKEN }}
     - name: Build Docs
       run:  |
-        cd meshery-cloud
+        cd meshplay-cloud
         npm i -g @redocly/cli@latest
         make docs-build
     - name: Set up QEMU
@@ -213,7 +213,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
-          images: layer5/meshery-cloud
+          images: khulnasoft/meshplay-cloud
           flavor: |
             latest=true
           tags: |
@@ -230,7 +230,7 @@ jobs:
     - name: Build and Push
       uses: docker/build-push-action@v4
       with:
-        context: meshery-cloud
+        context: meshplay-cloud
         push: true
         build-args: |
           ENVIRONMENT=prod
@@ -244,19 +244,19 @@ jobs:
           GIT_VERSION: ${{inputs.release-version}}
           GIT_COMMITSHA: ${{ github.sha }}
       with:
-        host: ${{ secrets.MESHERY_CLOUD_AWS_PROD_HOST }}
-        username: ${{ secrets.MESHERY_CLOUD_AWS_PROD_USERNAME }}
-        key: ${{ secrets.MESHERY_CLOUD_AWS_PROD_KEY }}
+        host: ${{ secrets.MESHPLAY_CLOUD_AWS_PROD_HOST }}
+        username: ${{ secrets.MESHPLAY_CLOUD_AWS_PROD_USERNAME }}
+        key: ${{ secrets.MESHPLAY_CLOUD_AWS_PROD_KEY }}
         port: 22
         envs: GIT_VERSION,GIT_COMMITSHA
         script: |
           sudo su
           sudo su - -c "whoami"
           echo $GIT_VERSION
-          cd meshery-cloud
-          sudo su - -c "git pull https://l5io:${{ secrets.GH_ACCESS_TOKEN }}@github.com/layer5io/meshery-cloud"
+          cd meshplay-cloud
+          sudo su - -c "git pull https://l5io:${{ secrets.GH_ACCESS_TOKEN }}@github.com/khulnasoft/meshplay-cloud"
           sudo ./install/scripts/git-pull.sh
-          docker pull layer5/meshery-cloud:production-$GIT_VERSION
+          docker pull khulnasoft/meshplay-cloud:production-$GIT_VERSION
           make prod-deploy GIT_VERSION=$GIT_VERSION
           docker system prune -f
           docker image prune -a

@@ -33,11 +33,11 @@ const Header = () => {
   return (
     <StyledHeader>
       <h1>Hello 👋</h1>
-      <p>Welcome to Layer5 Discussion Forum Leaderboard</p>
+      <p>Welcome to KhulnaSoft Discussion Forum Leaderboard</p>
       <section>
         <a
           className="p-1"
-          href="https://discuss.layer5.io"
+          href="https://discuss.khulnasoft.com"
           target="_blank"
           rel="noreferrer"
         >

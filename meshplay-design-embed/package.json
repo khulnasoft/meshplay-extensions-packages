@@ -1,17 +1,17 @@
 {
-    "name": "@layer5/meshery-design-embed",
+    "name": "@khulnasoft/meshplay-design-embed",
     "private": false,
     "version": "0.4.0",
     "type": "module",
     "files": [
         "dist"
     ],
-    "main": "./dist/meshery-design-embed.umd.cjs",
-    "module": "./dist/meshery-design-embed.js",
+    "main": "./dist/meshplay-design-embed.umd.cjs",
+    "module": "./dist/meshplay-design-embed.js",
     "exports": {
         ".": {
-            "import": "./dist/meshery-design-embed.js",
-            "require": "./dist/meshery-design-embed.umd.cjs"
+            "import": "./dist/meshplay-design-embed.js",
+            "require": "./dist/meshplay-design-embed.umd.cjs"
         }
     },
     "publishConfig": {

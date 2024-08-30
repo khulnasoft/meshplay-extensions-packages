@@ -34,7 +34,7 @@ function Navigation({ theme, toggleTheme, showSignUpButton, logo }) {
   }, []);
   useEffect(() => {
     const CLOUD_USER_API =
-      "https://meshery.layer5.io/api/identity/users/profile";
+      "https://meshplay.khulnasoft.com/api/identity/users/profile";
     const fetchData = async () => {
       try {
         const token = getCookieValue("provider_token");
@@ -64,7 +64,7 @@ function Navigation({ theme, toggleTheme, showSignUpButton, logo }) {
   return (
     <Header>
       <nav className={scroll ? "scrolled" : ""}>
-        <img className="logo" src={logo} alt="Layer5 Logo" />
+        <img className="logo" src={logo} alt="KhulnaSoft Logo" />
         <div
           style={{
             display: "flex",
@@ -78,7 +78,7 @@ function Navigation({ theme, toggleTheme, showSignUpButton, logo }) {
             <Toggle theme={theme} toggleTheme={toggleTheme} />
             {showSignUpButton && !userData && (
               <a
-                href="https://meshery.layer5.io"
+                href="https://meshplay.khulnasoft.com"
                 className="signup-btn"
                 role="button"
               >
@@ -141,7 +141,7 @@ function Navigation({ theme, toggleTheme, showSignUpButton, logo }) {
                   rel="noreferrer"
                   target="_blank"
                   className="drop-item"
-                  href={`https://meshery.layer5.io/user/${userData.id}`}
+                  href={`https://meshplay.khulnasoft.com/user/${userData.id}`}
                 >
                   <div className="drop-item-icon">
                     <CloudIcon />
@@ -151,7 +151,7 @@ function Navigation({ theme, toggleTheme, showSignUpButton, logo }) {
                 <a
                   rel="noreferrer"
                   className="drop-item"
-                  href="https://playground.meshery.io"
+                  href="https://playground.meshplay.io"
                   target="_blank"
                 >
                   <div className="drop-item-icon">
@@ -163,7 +163,7 @@ function Navigation({ theme, toggleTheme, showSignUpButton, logo }) {
                   onClick={() => {
                     removeCookie("provider_token");
                     // Open logout API link in a new tab
-                    window.open("https://meshery.layer5.io/logout", "_blank");
+                    window.open("https://meshplay.khulnasoft.com/logout", "_blank");
 
                     // Refresh the current page
                     window.location.reload();
@@ -190,13 +190,13 @@ function Navigation({ theme, toggleTheme, showSignUpButton, logo }) {
         {!userData && (
           <div className="action-btns">
             <a
-              href="https://meshery.layer5.io"
+              href="https://meshplay.khulnasoft.com"
               className="signup-btn"
               role="button"
             >
               Login
             </a>
-            {/* <a href="https://demo.meshery.io" className="login-btn" role="button">Login</a> */}
+            {/* <a href="https://demo.meshplay.io" className="login-btn" role="button">Login</a> */}
           </div>
         )}
       </div>

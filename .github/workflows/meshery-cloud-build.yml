@@ -1,4 +1,4 @@
-name: Meshery Cloud Build
+name: Meshplay Cloud Build
 on:
 #   workflow_call:
 #     inputs:
@@ -54,10 +54,10 @@ jobs:
     if: inputs.release-environment == 'production'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Meshery Cloud code
+      - name: Checkout Meshplay Cloud code
         uses: actions/checkout@v4
         with:
-          repository: layer5io/meshery-cloud
+          repository: khulnasoft/meshplay-cloud
           fetch-depth: 1
           token: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: API Docs - Install Redocly
@@ -66,26 +66,26 @@ jobs:
       - name: API Docs - Update schema.yml
         uses: fjogeleit/yaml-update-action@main
         with:
-          repository: l5io/meshery-cloud
+          repository: l5io/meshplay-cloud
           branch: master
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           valueFile: 'models/openapi-schema/schema.yml'
           commitChange: true
           propertyPath: 'info.version'
           value: ${{inputs.release-version}}
-          message: Updated meshery-cloud version to ${{inputs.release-version}}
+          message: Updated meshplay-cloud version to ${{inputs.release-version}}
           commitUserName: l5io
-          commitUserEmail: l5io@layer5.io          
+          commitUserEmail: l5io@khulnasoft.com          
   staging:
     needs: update-doc-release-version
     if: always() && inputs.release-environment == 'staging' 
     name: Staging - Docker build and push
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Meshery Cloud code
+      - name: Checkout Meshplay Cloud code
         uses: actions/checkout@v4
         with:
-            repository: layer5io/meshery-cloud
+            repository: khulnasoft/meshplay-cloud
             fetch-depth: 1
             token: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: Build Docs
@@ -124,7 +124,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: layer5/meshery-cloud
+          images: khulnasoft/meshplay-cloud
           flavor: |
             latest=true
           tags: |
@@ -153,14 +153,14 @@ jobs:
         if: success()
         uses: appleboy/ssh-action@master
         with:
-            host: ${{ secrets.MESHERY_CLOUD_AWS_STG_HOST }}
-            username: ${{ secrets.MESHERY_CLOUD_AWS_PROD_USERNAME }}
-            key: ${{ secrets.MESHERY_CLOUD_AWS_PROD_KEY }}
+            host: ${{ secrets.MESHPLAY_CLOUD_AWS_STG_HOST }}
+            username: ${{ secrets.MESHPLAY_CLOUD_AWS_PROD_USERNAME }}
+            key: ${{ secrets.MESHPLAY_CLOUD_AWS_PROD_KEY }}
             port: 22
             script: |
-                cd meshery-cloud
+                cd meshplay-cloud
                 sudo git pull
-                sudo docker pull layer5/meshery-cloud:staging-latest
+                sudo docker pull khulnasoft/meshplay-cloud:staging-latest
                 sudo make stg-deploy
 
       # -
@@ -169,5 +169,5 @@ jobs:
       #   with:
       #     username: ${{ secrets.DOCKER_USERNAME }}
       #     password: ${{ secrets.DOCKER_PASSWORD }}
-      #     repository: meshery/meshery-docker-extension
+      #     repository: meshplay/meshplay-docker-extension
       #     readme-filepath: /install/docker-extension/README.md

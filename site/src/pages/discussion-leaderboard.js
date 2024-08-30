@@ -3,8 +3,8 @@ import TableComponent from '../sitecomponents/Leaderboard/Table';
 import { useFetchLeaderBoard } from '../api/leaderboard.api.client';
 import { useDarkMode } from '../sitecomponents/useDarkMode';
 import { ThemeProvider } from 'styled-components';
-import layer5LeaderboardLightMode from '../assets/images/layer5/Layer5_Learderboard_light.png';
-import layer5LeaderboardDarkMode from '../assets/images/layer5/Layer5_Learderboard_darkmode.png';
+import khulnasoftLeaderboardLightMode from '../assets/images/khulnasoft/KhulnaSoft_Learderboard_light.png';
+import khulnasoftLeaderboardDarkMode from '../assets/images/khulnasoft/KhulnaSoft_Learderboard_darkmode.png';
 import {
   GlobalStyle,
   darkTheme,
@@ -35,10 +35,10 @@ const LeaderBoard = () => {
   );
 
   const Logo =
-    theme === 'light' ? layer5LeaderboardLightMode : layer5LeaderboardDarkMode;
+    theme === 'light' ? khulnasoftLeaderboardLightMode : khulnasoftLeaderboardDarkMode;
   return (
     <>
-      <title>Layer5 LeaderBoard</title>
+      <title>KhulnaSoft LeaderBoard</title>
       <meta
         name="description"
         content="Showcasing Your Achievements as a User and a Contributor"
