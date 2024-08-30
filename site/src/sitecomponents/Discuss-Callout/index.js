@@ -1,7 +1,7 @@
 import React from "react";
 import DiscussWrapper from "./discuss.style";
 
-import Discuss from "../../assets/images/layer5/layer5-badges-white.png";
+import Discuss from "../../assets/images/khulnasoft/khulnasoft-badges-white.png";
 
 const DiscussCallout = () => {
   return (
@@ -9,7 +9,7 @@ const DiscussCallout = () => {
       <div className="explain">
         <div className="cards">
           <div className="card">
-            <a href="http://discuss.meshery.io/">
+            <a href="http://discuss.meshplay.khulnasoft.com/">
               <div className="parentcard">
                 <div className="section-title">
                   <h2>Join the Conversation</h2>

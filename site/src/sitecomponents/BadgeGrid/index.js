@@ -13,7 +13,7 @@ const Footer = () => {
         {jsonData.specialEditionBadges.map((badge) => {
           return (
             <div key={badge.slug}>
-              <img src={badge.location} alt="Layer5 badges" />
+              <img src={badge.location} alt="KhulnaSoft badges" />
               <span>{badge.title}</span>
               <p>{badge.description}</p>
             </div>
@@ -26,7 +26,7 @@ const Footer = () => {
         {jsonData.achievementBadges.map((badge) => {
           return (
             <div key={badge.slug}>
-              <img src={badge.location} alt="Layer5 badges" />
+              <img src={badge.location} alt="KhulnaSoft badges" />
               <span>{badge.title}</span>
               <p>{badge.description}</p>
             </div>
@@ -40,7 +40,7 @@ const Footer = () => {
         {jsonData.projectBadges.map((badge) => {
           return (
             <div key={badge.slug}>
-              <img src={badge.imageSource} alt="Layer5 badges" />
+              <img src={badge.imageSource} alt="KhulnaSoft badges" />
               <span>{badge.title}</span>
               <p dangerouslySetInnerHTML={{__html: badge.description}}></p>
             </div>
@@ -51,11 +51,11 @@ const Footer = () => {
 <h2 id="certification">Certification Badges</h2>
     <div className="badge-grid">
         <div>
-        <img src={MeshMasterCertified} alt="Layer5 badges" />
+        <img src={MeshMasterCertified} alt="KhulnaSoft badges" />
           <span>MeshMaster</span> <p>This badge is awarded to individuals who have demonstrated a clear and holistic understanding of cloud native infrastructure management.</p>
         </div>
         <div>
-        <img src={CertificationProgram} alt="Layer5 badges" />
+        <img src={CertificationProgram} alt="KhulnaSoft badges" />
           <span>Coming Soon...</span> <p>Additional certications are coming soon!</p>
         </div>
       </div>

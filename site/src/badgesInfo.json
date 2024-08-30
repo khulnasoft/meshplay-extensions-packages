@@ -16,7 +16,7 @@
             "slug": "hacktoberfest-contributor",
             "location": "assets/badges/hacktoberfest-contributor/hacktoberfest-contributor.png",
             "title": "Hacktoberfest Contributor",
-            "description": "This badge is awarded to the contributors who contribute to any Layer5 project during Hacktoberfest."
+            "description": "This badge is awarded to the contributors who contribute to any KhulnaSoft project during Hacktoberfest."
         }
     ],
     "achievementBadges": [
@@ -54,13 +54,13 @@
             "slug": "bring-a-buddy",
             "location": "assets/badges/bring-a-buddy/bring-a-buddy.png",
             "title": "Bring a Buddy",
-            "description": "This badge is awarded to the users who invite someone to Layer5 Cloud."
+            "description": "This badge is awarded to the users who invite someone to KhulnaSoft Cloud."
         },
         {
             "slug": "first-share",
             "location": "assets/badges/first-share/first-share.png",
             "title": "Sharing is Caring",
-            "description": "This badge is awarded upon first-time sharing one of your Meshery designs."
+            "description": "This badge is awarded upon first-time sharing one of your Meshplay designs."
         },
         {
             "slug": "first-deployment",
@@ -72,7 +72,7 @@
             "slug": "need-for-speed",
             "location": "assets/badges/need-for-speed/need-for-speed.png",
             "title": "Need for Speed",
-            "description": "This badge is awarded upon successful execution of your first Meshery performance test."
+            "description": "This badge is awarded upon successful execution of your first Meshplay performance test."
         },
         {
             "slug": "first-interactive-terminal-session",
@@ -96,7 +96,7 @@
             "slug": "gitops-connected",
             "location": "assets/badges/gitops-connected/gitops-connected.png",
             "title": "GitOps Connected",
-            "description": "This badge is awarded to users upon establishment of a connection with Meshery GitHub App."
+            "description": "This badge is awarded to users upon establishment of a connection with Meshplay GitHub App."
         },
         {
             "slug": "meshmap-snapshot",
@@ -108,7 +108,7 @@
             "slug": "continuous-contributor",
             "location": "assets/badges/continuous-contributor/continuous-contributor.png",
             "title": "Continuous Contributor",
-            "description": "This badge is awarded to the community members who make consistent and impactful contributions for a long period of time in Layer5 projects in recognition and appreciation of their efforts."
+            "description": "This badge is awarded to the community members who make consistent and impactful contributions for a long period of time in KhulnaSoft projects in recognition and appreciation of their efforts."
         }
     ],
     "projectBadges": [
@@ -116,13 +116,13 @@
             "slug": "ui-ux",
             "imageSource": "assets/badges/ui-ux/ui-ux.png",
             "title": "UI/UX",
-            "description": "This badge is awarded to the community members who create or improve designs for visual aspects or user flow for any of the websites, flyers, promotions, Meshery UI, and so on in recognition and appreciation of their efforts."
+            "description": "This badge is awarded to the community members who create or improve designs for visual aspects or user flow for any of the websites, flyers, promotions, Meshplay UI, and so on in recognition and appreciation of their efforts."
         },
         {
             "slug": "meshmap",
             "imageSource": "assets/badges/meshmap/meshmap.png",
             "title": "MeshMap",
-            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the <a href='https://layer5.io/cloud-native-management/meshmap'>MeshMap</a> project in recognition and appreciation of their efforts. Community members who earn this badge occasionally become a project maintainer."
+            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the <a href='https://khulnasoft.com/cloud-native-management/meshmap'>MeshMap</a> project in recognition and appreciation of their efforts. Community members who earn this badge occasionally become a project maintainer."
         },
         {
             "slug": "service-mesh-performance",
@@ -134,13 +134,13 @@
             "slug": "community",
             "imageSource": "assets/badges/community/community.png",
             "title": "Community",
-            "description": "This badge is awarded to the community members who repeatedly engage in welcoming, encouraging, and supporting other Layer5 community members. Community members who earn this badge occasionally graduate to undertaking the Community Manager role."
+            "description": "This badge is awarded to the community members who repeatedly engage in welcoming, encouraging, and supporting other KhulnaSoft community members. Community members who earn this badge occasionally graduate to undertaking the Community Manager role."
         },
         {
-            "slug": "meshery",
-            "imageSource": "assets/badges/meshery/meshery.png",
-            "title": "Meshery",
-            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the Meshery project. Community members who earn this badge occasionally become a project maintainer."
+            "slug": "meshplay",
+            "imageSource": "assets/badges/meshplay/meshplay.png",
+            "title": "Meshplay",
+            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the Meshplay project. Community members who earn this badge occasionally become a project maintainer."
         },
         {
             "slug": "patterns",
@@ -152,7 +152,7 @@
             "slug": "landscape",
             "imageSource": "assets/badges/landscape/landscape.png",
             "title": "Landscape",
-            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the layer5.io website."
+            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the khulnasoft.com website."
         },
         {
             "slug": "nighthawk",
@@ -161,22 +161,22 @@
             "description": "This badge is awarded to the community members who make consistent and impactful contributions to the NightHawk project in recognition and appreciation of their efforts. Community members who earn this badge occasionally become a project maintainer."
         },
         {
-            "slug": "meshery-catalog",
-            "imageSource": "assets/badges/meshery-catalog/meshery-catalog.png",
-            "title": "Meshery Catalog",
-            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the <a href='https://meshery.io/catalog'>Meshery Catalog</a> of Meshery project in recognition and appreciation of their efforts."
+            "slug": "meshplay-catalog",
+            "imageSource": "assets/badges/meshplay-catalog/meshplay-catalog.png",
+            "title": "Meshplay Catalog",
+            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the <a href='https://meshplay.khulnasoft.com/catalog'>Meshplay Catalog</a> of Meshplay project in recognition and appreciation of their efforts."
         },
         {
             "slug": "docker-extension",
             "imageSource": "assets/badges/docker-extension/docker-extension.png",
             "title": "Docker Extension",
-            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the Docker Extension of meshery project in recognition and appreciation of their efforts."
+            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the Docker Extension of meshplay project in recognition and appreciation of their efforts."
         },
         {
-            "slug": "meshery-docs",
-            "imageSource": "assets/badges/meshery-docs/meshery-docs.png",
-            "title": "Meshery Docs",
-            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the <a href='https://docs.meshery.io'>Meshery Docs</a> in recognition and appreciation of their efforts."
+            "slug": "meshplay-docs",
+            "imageSource": "assets/badges/meshplay-docs/meshplay-docs.png",
+            "title": "Meshplay Docs",
+            "description": "This badge is awarded to the community members who make consistent and impactful contributions to the <a href='https://docs-meshplay.khulnasoft.com'>Meshplay Docs</a> in recognition and appreciation of their efforts."
         },
         {
             "slug": "meshsync",

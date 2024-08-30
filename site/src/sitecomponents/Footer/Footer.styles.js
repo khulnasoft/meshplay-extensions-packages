@@ -107,7 +107,7 @@ const FooterWrapper = styled.section`
     }
   }
   
-  .meshery-footer {
+  .meshplay-footer {
     display: inline-flex;
     align-items: center;
     justify-content: center;

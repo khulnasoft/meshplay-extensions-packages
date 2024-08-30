@@ -61,7 +61,7 @@ export const useFetchLeaderBoard = () => {
             <MemberContainer>
               <div className="avatar">
                 <Avatar
-                  src={`https://discuss.layer5.io/${avatarUrl}`}
+                  src={`https://discuss.khulnasoft.com/${avatarUrl}`}
                   alt={user?.name}
                 />
               </div>

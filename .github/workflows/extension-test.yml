@@ -1,4 +1,4 @@
-name: Meshery Extension Test
+name: Meshplay Extension Test
 on:
   release:
     types: [published]
@@ -14,7 +14,7 @@ on:
 
 jobs:
   build-ui-and-server:
-    uses: meshery/meshery/.github/workflows/build-ui-server-reusable-workflow.yml@master
+    uses: meshplay/meshplay/.github/workflows/build-ui-server-reusable-workflow.yml@master
     secrets:
       NODE_VERSION: ${{ secrets.NODE_VERSION }}
       GO_VERSION: ${{ secrets.GO_VERSION }}
@@ -23,22 +23,22 @@ jobs:
     name: UI end-to-end tests
     runs-on: ubuntu-latest
     steps:
-      - name: Check out Meshery code
+      - name: Check out Meshplay code
         uses: actions/checkout@v4
         with:
-          repository: meshery/meshery
+          repository: meshplay/meshplay
           fetch-depth: 1
           path: .
-      - name: Check out meshery-consul code
+      - name: Check out meshplay-consul code
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          repository: layer5io/meshery-consul
-          path: ./meshery-consul
+          repository: khulnasoft/meshplay-consul
+          path: ./meshplay-consul
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: meshery
+          name: meshplay
           path: server/cmd/
       - name: Setup go
         uses: actions/setup-go@v4
@@ -52,25 +52,25 @@ jobs:
         uses: helm/kind-action@v1.1.0
         with:
           cluster_name: "kind-cluster"
-      - name: Create a out/ folder in meshery ui
+      - name: Create a out/ folder in meshplay ui
         run: |
           mkdir -p ui/out
-      - name: Download Meshery-ui artifacts
+      - name: Download Meshplay-ui artifacts
         uses: actions/download-artifact@v4
         with:
-          name: meshery-ui-build
+          name: meshplay-ui-build
           path: ui/out/
       - name: Update /etc/hosts
-        run: echo "127.0.0.1 mesherylocal.layer5.io" | sudo tee -a /etc/hosts
-      - name: Run meshery-consul
+        run: echo "127.0.0.1 meshplaylocal.khulnasoft.com" | sudo tee -a /etc/hosts
+      - name: Run meshplay-consul
         run: |
-          mkdir -p /home/runner/.meshery/bin
-          cd ./meshery-consul
+          mkdir -p /home/runner/.meshplay/bin
+          cd ./meshplay-consul
           go run main.go &
           sleep 60
       - name: Set Release extensions
         run: |
-          curl -s https://api.github.com/repos/layer5labs/meshery-extensions-packages/releases >> extension_releases.json
+          curl -s https://api.github.com/repos/khulnasoft/meshplay-extensions-packages/releases >> extension_releases.json
           export TAG=$(jq .[0].tag_name extension_releases.json)
           echo tag=$TAG >> $GITHUB_ENV
           echo $TAG
@@ -78,22 +78,22 @@ jobs:
         run: |
           echo ${{env.tag}}
           echo ${{env}}
-          mkdir -p /home/runner/.meshery/provider/Meshery/${{env.tag}}/provider/navigator
+          mkdir -p /home/runner/.meshplay/provider/Meshplay/${{env.tag}}/provider/navigator
       - name: Run backend
         env:
-          PROVIDER_BASE_URLS: https://meshery.layer5.io
+          PROVIDER_BASE_URLS: https://meshplay.khulnasoft.com
           PORT: 9081
-          ADAPTER_URLS: "mesherylocal.layer5.io:10000 mesherylocal.layer5.io:10001 mesherylocal.layer5.io:10002 mesherylocal.layer5.io:10003 mesherylocal.layer5.io:10004 mesherylocal.layer5.io:10008 mesherylocal.layer5.io:10009 mesherylocal.layer5.io:10007"
+          ADAPTER_URLS: "meshplaylocal.khulnasoft.com:10000 meshplaylocal.khulnasoft.com:10001 meshplaylocal.khulnasoft.com:10002 meshplaylocal.khulnasoft.com:10003 meshplaylocal.khulnasoft.com:10004 meshplaylocal.khulnasoft.com:10008 meshplaylocal.khulnasoft.com:10009 meshplaylocal.khulnasoft.com:10007"
         run: |
           cd server/cmd
           chmod +x ./main
           BUILD=${{env.tag}} ./main &
-      - name: Download Meshery Extension Package Version ${{env.tag}}
+      - name: Download Meshplay Extension Package Version ${{env.tag}}
         run: |
-          wget https://github.com/layer5labs/meshery-extensions-packages/releases/download/${{env.tag}}/provider-meshery.tar.gz 
-          tar -xzf   provider-meshery.tar.gz -C /home/runner/.meshery/provider/Meshery/${{env.tag}}
+          wget https://github.com/khulnasoft/meshplay-extensions-packages/releases/download/${{env.tag}}/provider-meshplay.tar.gz 
+          tar -xzf   provider-meshplay.tar.gz -C /home/runner/.meshplay/provider/Meshplay/${{env.tag}}
       - name: show runner tree
-        run: tree /home/runner/.meshery
+        run: tree /home/runner/.meshplay
       - name: checkout cypress code
         uses: actions/checkout@v4
         with:
