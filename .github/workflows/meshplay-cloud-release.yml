@@ -21,7 +21,7 @@ on:
         required: true
       DOCKER_USERNAME: 
         required: true
-      DOCKER_PASSWORD: 
+      DOCKER_TOKEN: 
         required: true
       MESHPLAY_CLOUD_AWS_PROD_USERNAME:
         required: true
@@ -68,7 +68,7 @@ jobs:
       - name: API Docs - Update schema.yml
         uses: fjogeleit/yaml-update-action@v0.13.2
         with:
-          repository: l5io/meshplay-cloud
+          repository: gitworkflows/meshplay-cloud
           branch: master
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           valueFile: 'models/openapi-schema/schema.yml'
@@ -76,8 +76,8 @@ jobs:
           propertyPath: 'info.version'
           value: ${{inputs.release-version}}
           message: Updated meshplay-cloud version to ${{inputs.release-version}}
-          commitUserName: l5io
-          commitUserEmail: l5io@khulnasoft.com
+          commitUserName: gitworkflows
+          commitUserEmail: gitworkflows@khulnasoft.com
       
   lint-fix:
     name: Lint UI and Backend
@@ -107,8 +107,8 @@ jobs:
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_user_name: l5io
-          commit_user_email: l5io@khulnasoft.com
+          commit_user_name: gitworkflows
+          commit_user_email: gitworkflows@khulnasoft.com
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit_options: '--signoff'
           commit_message: '[CI] Lint fix backend/ui'
@@ -154,7 +154,7 @@ jobs:
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        password: ${{ secrets.DOCKER_TOKEN }}
     - name: Build and Push
       uses: docker/build-push-action@v5
       with:
@@ -181,7 +181,7 @@ jobs:
         script: |
           sudo su
           cd meshplay-cloud
-          sudo su - -c "git pull https://l5io:${{ secrets.GH_ACCESS_TOKEN }}@github.com/khulnasoft/meshplay-cloud"
+          sudo su - -c "git pull https://gitworkflows:${{ secrets.GH_ACCESS_TOKEN }}@github.com/khulnasoft/meshplay-cloud"
           docker pull khulnasoft/meshplay-cloud:staging-$GIT_VERSION
           sudo su - -c "whoami"
           make stg-deploy GIT_VERSION=$GIT_VERSION
@@ -226,7 +226,7 @@ jobs:
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        password: ${{ secrets.DOCKER_TOKEN }}
     - name: Build and Push
       uses: docker/build-push-action@v4
       with:
@@ -254,7 +254,7 @@ jobs:
           sudo su - -c "whoami"
           echo $GIT_VERSION
           cd meshplay-cloud
-          sudo su - -c "git pull https://l5io:${{ secrets.GH_ACCESS_TOKEN }}@github.com/khulnasoft/meshplay-cloud"
+          sudo su - -c "git pull https://gitworkflows:${{ secrets.GH_ACCESS_TOKEN }}@github.com/khulnasoft/meshplay-cloud"
           sudo ./install/scripts/git-pull.sh
           docker pull khulnasoft/meshplay-cloud:production-$GIT_VERSION
           make prod-deploy GIT_VERSION=$GIT_VERSION

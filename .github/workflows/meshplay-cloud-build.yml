@@ -66,7 +66,7 @@ jobs:
       - name: API Docs - Update schema.yml
         uses: fjogeleit/yaml-update-action@main
         with:
-          repository: l5io/meshplay-cloud
+          repository: gitworkflows/meshplay-cloud
           branch: master
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           valueFile: 'models/openapi-schema/schema.yml'
@@ -74,8 +74,8 @@ jobs:
           propertyPath: 'info.version'
           value: ${{inputs.release-version}}
           message: Updated meshplay-cloud version to ${{inputs.release-version}}
-          commitUserName: l5io
-          commitUserEmail: l5io@khulnasoft.com          
+          commitUserName: gitworkflows
+          commitUserEmail: gitworkflows@khulnasoft.com          
   staging:
     needs: update-doc-release-version
     if: always() && inputs.release-environment == 'staging' 
@@ -137,7 +137,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build and Push
         uses: docker/build-push-action@v5
         with:
@@ -168,6 +168,6 @@ jobs:
       #   uses: peter-evans/dockerhub-description@v3
       #   with:
       #     username: ${{ secrets.DOCKER_USERNAME }}
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
+      #     password: ${{ secrets.DOCKER_TOKEN }}
       #     repository: meshplay/meshplay-docker-extension
       #     readme-filepath: /install/docker-extension/README.md
