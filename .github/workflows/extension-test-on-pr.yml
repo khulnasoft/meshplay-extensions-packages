@@ -21,17 +21,17 @@ on:
         required: true
       GO_VERSION:
         required: true
-      GH_ACCESS_TOKEN:
+      ORG_REPO_TOKEN:
         required: true
       CYPRESS_RECORD_KEY:
         required: true
-      LAYER5_CLOUD_USERNAME:
+      KHULNASOFT_CLOUD_USERNAME:
         required: true
-      LAYER5_CLOUD_PASSWORD:
+      KHULNASOFT_CLOUD_PASSWORD:
         required: true
-      LAYER5_CLOUD_TESTING_BOT_EMAIL:
+      KHULNASOFT_CLOUD_TESTING_BOT_EMAIL:
         required: true
-      LAYER5_CLOUD_TESTING_BOT_PASSWORD:
+      KHULNASOFT_CLOUD_TESTING_BOT_PASSWORD:
         required: true
 
 jobs:
@@ -41,7 +41,7 @@ jobs:
       - name: comment starting point
         uses: hasura/comment-progress@v2.3.0
         with:
-          github-token: ${{ secrets.GH_ACCESS_TOKEN }}
+          github-token: ${{ secrets.ORG_REPO_TOKEN }}
           repository: "khulnasoft/meshplay-extensions"
           number: ${{ inputs.pr_number }}
           id: extension-test
@@ -59,7 +59,7 @@ jobs:
       - name: comment progress
         uses: hasura/comment-progress@v2.3.0
         with:
-          github-token: ${{ secrets.GH_ACCESS_TOKEN }}
+          github-token: ${{ secrets.ORG_REPO_TOKEN }}
           repository: "khulnasoft/meshplay-extensions"
           number: ${{ inputs.pr_number }}
           id: extension-test
@@ -75,7 +75,7 @@ jobs:
           path: ./meshplay-extensions
           fetch-depth: 1
           ref: ${{ inputs.branch_name }}
-          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          token: ${{ secrets.ORG_REPO_TOKEN }}
 
       - name: Checkout Meshplay code
         uses: actions/checkout@v4
@@ -83,7 +83,7 @@ jobs:
           repository: meshplay/meshplay
           path: ./meshplay
           fetch-depth: 1
-          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          token: ${{ secrets.ORG_REPO_TOKEN }}
 
       - name: Setup go
         uses: actions/setup-go@v5
@@ -114,7 +114,7 @@ jobs:
       - name: comment progress
         uses: hasura/comment-progress@v2.3.0
         with:
-          github-token: ${{ secrets.GH_ACCESS_TOKEN }}
+          github-token: ${{ secrets.ORG_REPO_TOKEN }}
           repository: "khulnasoft/meshplay-extensions"
           number: ${{ inputs.pr_number }}
           id: extension-test
@@ -124,7 +124,7 @@ jobs:
         if: failure()
         uses: hasura/comment-progress@v2.3.0
         with:
-          github-token: ${{ secrets.GH_ACCESS_TOKEN }}
+          github-token: ${{ secrets.ORG_REPO_TOKEN }}
           repository: "khulnasoft/meshplay-extensions"
           number: ${{ inputs.pr_number }}
           id: extension-test
@@ -140,7 +140,7 @@ jobs:
       - name: comment progress start
         uses: hasura/comment-progress@v2.3.0
         with:
-          github-token: ${{ secrets.GH_ACCESS_TOKEN }}
+          github-token: ${{ secrets.ORG_REPO_TOKEN }}
           repository: "khulnasoft/meshplay-extensions"
           number: ${{ inputs.pr_number }}
           id: extension-test
@@ -237,7 +237,7 @@ jobs:
           path: ./meshplay-extensions
           fetch-depth: 1
           ref: ${{ inputs.branch_name }}
-          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          token: ${{ secrets.ORG_REPO_TOKEN }}
 
       - uses: actions/setup-node@v4
         with:
@@ -252,7 +252,7 @@ jobs:
       - name: comment progress start
         uses: hasura/comment-progress@v2.3.0
         with:
-          github-token: ${{ secrets.GH_ACCESS_TOKEN }}
+          github-token: ${{ secrets.ORG_REPO_TOKEN }}
           repository: "khulnasoft/meshplay-extensions"
           number: ${{ inputs.pr_number }}
           id: extension-test
@@ -270,8 +270,8 @@ jobs:
           PROVIDER_TOKEN: ${{ secrets.PROVIDER_TOKEN }}
           MESHPLAY_SERVER_URL: "http://localhost:9081"
           REMOTE_PROVIDER_URL: "https://meshplay.khulnasoft.com"
-          REMOTE_PROVIDER_USER_EMAIL: ${{ secrets.LAYER5_CLOUD_TESTING_BOT_EMAIL }}
-          REMOTE_PROVIDER_USER_PASSWORD: ${{ secrets.LAYER5_CLOUD_TESTING_BOT_PASSWORD }}
+          REMOTE_PROVIDER_USER_EMAIL: ${{ secrets.KHULNASOFT_CLOUD_TESTING_BOT_EMAIL }}
+          REMOTE_PROVIDER_USER_PASSWORD: ${{ secrets.KHULNASOFT_CLOUD_TESTING_BOT_PASSWORD }}
 
       - name: comment the summary
         uses: hasura/comment-progress@v2.3.0
@@ -280,7 +280,7 @@ jobs:
           message: |
             ${{join(steps.run_tests.outputs.*, '\n')}}
 
-          github-token: ${{ secrets.GH_ACCESS_TOKEN }}
+          github-token: ${{ secrets.ORG_REPO_TOKEN }}
           repository: "khulnasoft/meshplay-extensions"
           number: ${{ inputs.pr_number }}
           id: extension-test
@@ -297,7 +297,7 @@ jobs:
         uses: hasura/comment-progress@v2.3.0
         if: ${{ failure()  }}
         with:
-          github-token: ${{ secrets.GH_ACCESS_TOKEN }}
+          github-token: ${{ secrets.ORG_REPO_TOKEN }}
           repository: "khulnasoft/meshplay-extensions"
           number: ${{ inputs.pr_number }}
           id: extension-test
@@ -308,7 +308,7 @@ jobs:
         if: always()
         uses: hasura/comment-progress@v2.3.0
         with:
-          github-token: ${{ secrets.GH_ACCESS_TOKEN }}
+          github-token: ${{ secrets.ORG_REPO_TOKEN }}
           repository: "khulnasoft/meshplay-extensions"
           number: ${{ inputs.pr_number }}
           id: extension-test
