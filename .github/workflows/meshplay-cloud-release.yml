@@ -17,7 +17,7 @@ on:
         default: "master"
         type: string
     secrets:
-      GH_ACCESS_TOKEN: 
+      ORG_REPO_TOKEN: 
         required: true
       DOCKER_USERNAME: 
         required: true
@@ -61,7 +61,7 @@ jobs:
         with:
           repository: khulnasoft/meshplay-cloud
           fetch-depth: 1
-          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          token: ${{ secrets.ORG_REPO_TOKEN }}
       - name: API Docs - Install Redocly
         uses: actions/setup-node@v4
       - run: npm i -g @redocly/cli@latest
@@ -70,7 +70,7 @@ jobs:
         with:
           repository: gitworkflows/meshplay-cloud
           branch: master
-          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          token: ${{ secrets.ORG_REPO_TOKEN }}
           valueFile: 'models/openapi-schema/schema.yml'
           commitChange: true
           propertyPath: 'info.version'
@@ -90,7 +90,7 @@ jobs:
           path: meshplay-cloud
           repository: khulnasoft/meshplay-cloud
           fetch-depth: 1
-          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          token: ${{ secrets.ORG_REPO_TOKEN }}
           ref: ${{ inputs.branch }}
       - uses: actions/setup-go@v5
         with:
@@ -126,7 +126,7 @@ jobs:
         path: meshplay-cloud
         repository: khulnasoft/meshplay-cloud
         fetch-depth: 1
-        token: ${{ secrets.GH_ACCESS_TOKEN }}
+        token: ${{ secrets.ORG_REPO_TOKEN }}
         ref: ${{ inputs.branch }}
     - name: Build Docs
       run:  |
@@ -181,7 +181,7 @@ jobs:
         script: |
           sudo su
           cd meshplay-cloud
-          sudo su - -c "git pull https://gitworkflows:${{ secrets.GH_ACCESS_TOKEN }}@github.com/khulnasoft/meshplay-cloud"
+          sudo su - -c "git pull https://gitworkflows:${{ secrets.ORG_REPO_TOKEN }}@github.com/khulnasoft/meshplay-cloud"
           docker pull khulnasoft/meshplay-cloud:staging-$GIT_VERSION
           sudo su - -c "whoami"
           make stg-deploy GIT_VERSION=$GIT_VERSION
@@ -199,7 +199,7 @@ jobs:
         repository: khulnasoft/meshplay-cloud
         path: meshplay-cloud
         fetch-depth: 1
-        token: ${{ secrets.GH_ACCESS_TOKEN }}
+        token: ${{ secrets.ORG_REPO_TOKEN }}
     - name: Build Docs
       run:  |
         cd meshplay-cloud
@@ -254,7 +254,7 @@ jobs:
           sudo su - -c "whoami"
           echo $GIT_VERSION
           cd meshplay-cloud
-          sudo su - -c "git pull https://gitworkflows:${{ secrets.GH_ACCESS_TOKEN }}@github.com/khulnasoft/meshplay-cloud"
+          sudo su - -c "git pull https://gitworkflows:${{ secrets.ORG_REPO_TOKEN }}@github.com/khulnasoft/meshplay-cloud"
           sudo ./install/scripts/git-pull.sh
           docker pull khulnasoft/meshplay-cloud:production-$GIT_VERSION
           make prod-deploy GIT_VERSION=$GIT_VERSION
